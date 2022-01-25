@@ -1,0 +1,79 @@
+*, ::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to right, #b993d6, #8ca6db); 
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.grille {
+  background: rgb(195,195,195);
+  display: grid;
+  /*3*200 = 600 , 4*200 = 800*/
+  grid-template: repeat(3, 200px) / repeat(4, 200px);
+  width: 800px;
+  height: 600px;
+  margin: 75px auto 0;
+}
+
+img {
+ width: 100px;
+ height: 150px
+}
+
+.carte {
+  background-color: transparent;
+  /*vision des cartes qui vont tourner*/
+  perspective: 1000px;
+  margin: 5px;
+}
+
+.double-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  /*preserve animation*/
+  transform-style: preserve-3d;
+}
+
+.face, .arriere {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*quand elle tourne on ne veut pas voir leur face cachée*/
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.face {
+  background: #333;
+  /*de base cette carte est retournée et cachée avec backface-visibility*/
+   transform: rotateY(180deg);
+   /*flex sert juste à centrer horizontalement avec justify-content et verticalement avec align item*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.face img {
+  width: 120px;
+}
+
+.arriere {
+  background: #333;
+  /*flex sert juste à centrer horizontalement avec justify-content et verticalement avec align item*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*pour emojis qui compte comme du texte*/
+  font-size: 80px;
+}
+
+.double-face:active {
+  transform: rotateY(180deg)
+}
