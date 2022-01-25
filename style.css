@@ -74,6 +74,6 @@ img {
   font-size: 80px;
 }
 
-.double-face:active {
+.active {
   transform: rotateY(180deg)
 }
