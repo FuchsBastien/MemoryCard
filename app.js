@@ -18,7 +18,7 @@ function retourneCarte(){
 
     //si verrouillage est true
     if (verouillage) 
-    return
+    return;
 
     /*on prend l'élèment 2 de l'enfant (div double face et lui rajouter la classe active) 
     l'élèment 1 et 3 compte comme des <>*/
@@ -58,16 +58,18 @@ function correspondance(){
     if(premiereCarte.getAttribute('data-attr') === secondeCarte.getAttribute('data-attr')) {
 
         /*on enlève l'évènement par le click de la fonction retournerCarte pour premierCarte et secondCarte
+        (on leur enlève leur valeur)
         (on dit aux cartes de rester retournée)*/
         premiereCarte.removeEventListener('click', retourneCarte);
         secondeCarte.removeEventListener('click', retourneCarte);
+        verouillage = false;
 
     } else {
         //en attendant que le seTimeout s'effectue on ne peut plus cliquer sur d'autres carte
         verouillage = true;
          //on laisse les 2 cartes dévoilées non correspondantes pendant 1500 ms pour les mémoriser
         setTimeout(() => {
-            //on enlève la class active pour retourner les cartes
+            //on enlève la class active pour recacher les cartes 
 
             premiereCarte.childNodes[1].classList.remove('active');
             secondeCarte.childNodes[1].classList.remove('active');
@@ -75,8 +77,24 @@ function correspondance(){
             verouillage = false;
         }, 1500)
     }
-
 }
+
+//s'applique à chaque actualisation de page
+function aleatoire(){
+    //pour chaque carte
+    cartes.forEach(card => {
+        // math.floor retourne entier en dessous d'un chiffre à virgule
+        //math.random retourn entre 0 et 1, 1 non inclus
+        //ex : 0.6 *12 = 7.2 donc 7
+        let randomPos = Math.floor(Math.random() * 12);
+        //on passe la valeur de randomPos à card par le style order
+        card.style.order = randomPos;
+    })
+}
+aleatoire();
+
+
+
 
 /*Résumé :
 Pour caque carte cliquée on applique la fonction carteRetournee :
